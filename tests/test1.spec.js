@@ -13,7 +13,7 @@ test.describe('Test cases from Automation Exercise', () => {
 
 
 
-    test.only('Test Case 1: Register User', async ({ page }) => {
+    test('Test Case 1: Register User', async ({ page }) => {
 
         const signInLogInPage = new SignInLogInPage(page);
         const accountStatusPage = new AccountStatusPage(page);
