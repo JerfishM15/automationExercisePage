@@ -1,4 +1,3 @@
-import { expect } from '@playwright/test';
 
 export class SignInLogInPage {
 
@@ -16,16 +15,16 @@ export class SignInLogInPage {
         this.incorrectLoginError = page.locator('.login-form > form > p');
     }
 
-    async isNewUserSignupTextVisible() {
-        await expect(this.newUserSignupText).toBeVisible();
+    isNewUserSignupText() {
+         return this.newUserSignupText;
     }
 
-    async isLoginToYourAccountTextVisible() {
-        await expect(this.loginToYourAccountText).toBeVisible();
+     isLoginToYourAccountText() {
+        return this.loginToYourAccountText;
     }
 
-    async isIncorrectLoginErrorVisible() {
-        await expect(this.incorrectLoginError).toBeVisible();
+    isIncorrectLoginErrortext() {
+        return this.incorrectLoginError;
     }
 
     async fillSignupName(name) {

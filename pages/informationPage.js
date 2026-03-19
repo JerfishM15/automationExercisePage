@@ -1,4 +1,3 @@
-import { expect } from '@playwright/test';
 
 export class  InformationPage {
 
@@ -31,8 +30,8 @@ export class  InformationPage {
 
 
 
-    async isEnterInfoTitleVisible() {
-        await expect(this.enterInfoTitle).toBeVisible();
+     isEnterInfoTitle() {
+        return this.enterInfoTitle;
     }
 
     async selectGender() {

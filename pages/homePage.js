@@ -15,16 +15,16 @@ export class HomePage {
         await this.page.goto('/');
     }
 
-    async isHomePageVisible() {
-        await expect(this.homeImage).toBeVisible();
+    homePagelogo() {
+       return this.homeImage;
     }
 
     async clickSignupLoginButton() {
         await this.signUpLoginBtn.click();
     }
 
-    async isLoggedInAsUsernameVisible() {
-        await expect(this.loggedInAsUsername).toBeVisible();
+     isLoggedInAsUsernameText() {
+        return this.loggedInAsUsername;
     }
 
 

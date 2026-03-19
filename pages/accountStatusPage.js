@@ -1,4 +1,4 @@
-import { expect } from '@playwright/test';
+
 
 export class AccountStatusPage {
 
@@ -12,16 +12,16 @@ export class AccountStatusPage {
     }
 
 
-    async isAccountCreatedTextVisible() {
-        await expect(this.accountCreatedText).toBeVisible();
+     isAccountCreatedText() {
+        return this.accountCreatedText;
     }
 
     async clickContinueButton() {
         await this.continueBtn.click();
     }
 
-    async isAccountDeletedTextVisible() {
-        await expect(this.accountDeletedText).toBeVisible();
+    isAccountDeletedText() {
+        return this.accountDeletedText;
     }
 
 

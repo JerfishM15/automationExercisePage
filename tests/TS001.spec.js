@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { generalDataFixed } from '../utils/data.js';
 import { SignInLogInPage } from '../pages/SignInLogInPage.js';
 import { AccountStatusPage } from '../pages/accountStatusPage.js';
@@ -25,13 +25,13 @@ test.describe('Test cases from Automation Exercise', () => {
         await homePage.visit();
 
         // Verify that the home page is visible successfully
-        await homePage.isHomePageVisible();
+        await expect(homePage.homePagelogo()).toBeVisible();
 
         // Click on 'Signup / Login' button
         await homePage.clickSignupLoginButton();
 
         // Verify 'New User Signup!' is visible
-        await signInLogInPage.isNewUserSignupTextVisible();
+        await expect(signInLogInPage.isNewUserSignupText()).toBeVisible();
 
         // Enter name and email address
         await signInLogInPage.fillSignupName(data.name);
@@ -41,7 +41,7 @@ test.describe('Test cases from Automation Exercise', () => {
         await signInLogInPage.clickSignupButton();
 
         // Verify that 'ENTER ACCOUNT INFORMATION' is visible
-        await informationPage.isEnterInfoTitleVisible();
+        await expect(informationPage.isEnterInfoTitle()).toBeVisible();
 
         // Fill details: Title, Password, Date of birth
         await informationPage.selectGender();
@@ -74,19 +74,19 @@ test.describe('Test cases from Automation Exercise', () => {
         await informationPage.clickCreateAccountButton();
 
         // Verify that 'ACCOUNT CREATED!' is visible
-        await accountStatusPage.isAccountCreatedTextVisible();
+        await expect(accountStatusPage.isAccountCreatedText()).toBeVisible();
 
         // Click 'Continue' button
         await accountStatusPage.clickContinueButton();
 
         // Verify that 'Logged in as username' is visible
-        await homePage.isLoggedInAsUsernameVisible();
+        await expect(homePage.isLoggedInAsUsernameText()).toBeVisible();
 
         // Click 'Delete Account' button
         await homePage.clickDeleteAccountButton();
 
         // Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
-        await accountStatusPage.isAccountDeletedTextVisible();
+        await expect(accountStatusPage.isAccountDeletedText()).toBeVisible();
         await accountStatusPage.clickContinueButton();
 
     });
@@ -106,7 +106,7 @@ test.describe('Test cases from Automation Exercise', () => {
         await homePage.clickSignupLoginButton();
 
         // Verify 'Login to your account' is visible
-        await signInLogInPage.isLoginToYourAccountTextVisible();
+        await expect(signInLogInPage.isLoginToYourAccountText()).toBeVisible();
 
         // Enter correct email address and password
         await signInLogInPage.fillLoginEmail(data.valideEmail);
@@ -116,7 +116,7 @@ test.describe('Test cases from Automation Exercise', () => {
         await signInLogInPage.clickLoginButton();
 
         // Verify that 'Logged in as username' is visible
-        await homePage.isLoggedInAsUsernameVisible();
+        await expect(homePage.isLoggedInAsUsernameText()).toBeVisible();
 
     });
 
@@ -134,7 +134,7 @@ test.describe('Test cases from Automation Exercise', () => {
         await homePage.clickSignupLoginButton();
 
         // Verify 'Login to your account' is visible
-        await signInLogInPage.isLoginToYourAccountTextVisible();
+        await expect(signInLogInPage.isLoginToYourAccountText()).toBeVisible();
 
 
         // Enter incorrect email address and password
@@ -145,7 +145,7 @@ test.describe('Test cases from Automation Exercise', () => {
         await signInLogInPage.clickLoginButton();
 
         // Verify error 'Your email or password is incorrect!' is visible
-        await signInLogInPage.isIncorrectLoginErrorVisible();
+        await expect(signInLogInPage.isIncorrectLoginErrortext()).toBeVisible();
 
 
     });
@@ -163,7 +163,7 @@ test.describe('Test cases from Automation Exercise', () => {
         await homePage.clickSignupLoginButton();
 
         // Verify 'Login to your account' is visible
-        await signInLogInPage.isLoginToYourAccountTextVisible();
+        await expect(signInLogInPage.isLoginToYourAccountText()).toBeVisible();
 
         // Enter correct email address and password
         await signInLogInPage.fillLoginEmail(data.valideEmail);
@@ -173,13 +173,13 @@ test.describe('Test cases from Automation Exercise', () => {
         await signInLogInPage.clickLoginButton();
 
         // Verify that 'Logged in as username' is visible
-        await homePage.isLoggedInAsUsernameVisible();
+        await expect(homePage.isLoggedInAsUsernameText()).toBeVisible();
 
         // Click 'Logout' button
         await homePage.clickLogoutButton();
 
         //  Verify that user is navigated to login page
-        await signInLogInPage.isLoginToYourAccountTextVisible();
+        await expect(signInLogInPage.isLoginToYourAccountText()).toBeVisible();
 
     });
 

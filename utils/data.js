@@ -16,5 +16,7 @@ export function generalDataFixed() {
     city: 'Los Angeles',
     zipcode: '90001',
     mobileNumber: '+1234567890',
+
+    
   };
 }
