@@ -1,5 +1,4 @@
 import { faker } from '@faker-js/faker';
-import { count } from 'node:console';
 
 export function generalDataFixed() {
   return {
