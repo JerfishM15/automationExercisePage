@@ -1,11 +1,12 @@
 import { test, expect } from '@playwright/test';
-import { generalDataFixed } from '../utils/data.js';
+import { generalDataFixed, generalDataRandom } from '../utils/data.js';
 import { SignInLogInPage } from '../pages/SignInLogInPage.js';
 import { AccountStatusPage } from '../pages/accountStatusPage.js';
 import { InformationPage } from '../pages/informationPage.js';
 import { HomePage } from '../pages/homePage.js';
 
 const data = generalDataFixed();
+const randomData = generalDataRandom();
 
 
 test.describe('Test cases from Automation Exercise', () => {
@@ -34,8 +35,8 @@ test.describe('Test cases from Automation Exercise', () => {
         await expect(signInLogInPage.isNewUserSignupText()).toBeVisible();
 
         // Enter name and email address
-        await signInLogInPage.fillSignupName(data.name);
-        await signInLogInPage.fillSignupEmail(data.email);
+        await signInLogInPage.fillSignupName(randomData.name);
+        await signInLogInPage.fillSignupEmail(randomData.email);
 
         // Click 'Signup' button
         await signInLogInPage.clickSignupButton();
@@ -45,12 +46,12 @@ test.describe('Test cases from Automation Exercise', () => {
 
         // Fill details: Title, Password, Date of birth
         await informationPage.selectGender();
-        await informationPage.fillPassword(data.password);
+        await informationPage.fillPassword(randomData.password);
         await informationPage.fillAccountInfo(
-            data.name, 
-            data.day, 
-            data.month, 
-            data.year);
+            randomData.name, 
+            randomData.day, 
+            randomData.month, 
+            randomData.year);
 
         // Select checkbox 'Sign up for our newsletter!'
         await informationPage.checkNewsletter();
@@ -60,15 +61,15 @@ test.describe('Test cases from Automation Exercise', () => {
 
         // Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number
         await informationPage.fillAddressInfo(
-            data.firstName, 
-            data.lastName, 
-            data.company, 
-            data.address, 
+            randomData.firstName, 
+            randomData.lastName, 
+            randomData.company, 
+            randomData.address, 
             data.country, 
-            data.state, 
-            data.city, 
-            data.zipcode, 
-            data.mobileNumber);
+            randomData.state, 
+            randomData.city, 
+            randomData.zipcode, 
+            randomData.mobileNumber);
 
         // Click 'Create Account button'
         await informationPage.clickCreateAccountButton();
@@ -117,6 +118,7 @@ test.describe('Test cases from Automation Exercise', () => {
 
         // Verify that 'Logged in as username' is visible
         await expect(homePage.isLoggedInAsUsernameText()).toBeVisible();
+        await expect(homePage.isLoggedInAsUsernameText()).toHaveText(data.name);
 
     });
 
@@ -138,8 +140,8 @@ test.describe('Test cases from Automation Exercise', () => {
 
 
         // Enter incorrect email address and password
-        await signInLogInPage.fillLoginEmail(data.email);
-        await signInLogInPage.fillLoginPassword(data.password);
+        await signInLogInPage.fillLoginEmail(randomData.email);
+        await signInLogInPage.fillLoginPassword(randomData.password);
 
         // Click 'Login' button
         await signInLogInPage.clickLoginButton();
@@ -174,6 +176,7 @@ test.describe('Test cases from Automation Exercise', () => {
 
         // Verify that 'Logged in as username' is visible
         await expect(homePage.isLoggedInAsUsernameText()).toBeVisible();
+        await expect(homePage.isLoggedInAsUsernameText()).toHaveText(data.name);
 
         // Click 'Logout' button
         await homePage.clickLogoutButton();
