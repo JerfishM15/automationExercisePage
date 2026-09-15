@@ -1,0 +1,1 @@
+Sample file used by Test Case 6 (Contact Us Form) to test file upload.

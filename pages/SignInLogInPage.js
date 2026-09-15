@@ -13,6 +13,7 @@ export class SignInLogInPage {
         this.loginPasswordInput = page.locator('[data-qa="login-password"]');
         this.loginBtn = page.locator('[data-qa="login-button"]');
         this.incorrectLoginError = page.locator('.login-form > form > p');
+        this.emailAlreadyExistError = page.locator('.signup-form > form > p');
     }
 
     isNewUserSignupText() {
@@ -25,6 +26,10 @@ export class SignInLogInPage {
 
     isIncorrectLoginErrortext() {
         return this.incorrectLoginError;
+    }
+
+    isEmailAlreadyExistError() {
+        return this.emailAlreadyExistError;
     }
 
     async fillSignupName(name) {

@@ -6,9 +6,14 @@ export function generalDataFixed() {
     valideEmail: 'manuel1@gmail.com',
     password: '123456',
     country: 'United States',
-  
-
-    
+    productName: 'Top',
+    emailAlreadyExistText: 'Email Address already exist!',
+    getInTouchText: 'Get In Touch',
+    contactUsSuccessText: 'Success! Your details have been submitted successfully.',
+    allProductsText: 'All Products',
+    searchedProductsText: 'Searched Products',
+    subscriptionText: 'Subscription',
+    subscribeSuccessText: 'You have been successfully subscribed!',
   };
 }
 
@@ -29,6 +34,8 @@ export function generalDataRandom() {
     state: faker.location.state(),
     city: faker.location.city(),
     zipcode: faker.location.zipCode(),
-    mobileNumber: faker.phone.number()
+    mobileNumber: faker.phone.number(),
+    subject: faker.lorem.sentence(3),
+    message: faker.lorem.paragraph()
   };
 }

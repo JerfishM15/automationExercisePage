@@ -4,6 +4,9 @@ import { SignInLogInPage } from '../pages/SignInLogInPage.js';
 import { AccountStatusPage } from '../pages/accountStatusPage.js';
 import { InformationPage } from '../pages/informationPage.js';
 import { HomePage } from '../pages/homePage.js';
+import { ContactUsPage } from '../pages/contactUsPage.js';
+import { ProductsPage } from '../pages/productsPage.js';
+import { ProductDetailPage } from '../pages/productDetailPage.js';
 
 const data = generalDataFixed();
 const randomData = generalDataRandom();
@@ -183,6 +186,192 @@ test.describe('Test cases from Automation Exercise', () => {
 
         //  Verify that user is navigated to login page
         await expect(signInLogInPage.isLoginToYourAccountText()).toBeVisible();
+
+    });
+
+
+
+    test('Test Case 5: Register User with existing email', async ({ page }) => {
+
+        const signInLogInPage = new SignInLogInPage(page);
+        const homePage = new HomePage(page);
+
+        // Visit the automation exercise website
+        await homePage.visit();
+
+        // Verify that home page is visible successfully
+        await expect(homePage.homePagelogo()).toBeVisible();
+
+        // Click on 'Signup / Login' button
+        await homePage.clickSignupLoginButton();
+
+        // Verify 'New User Signup!' is visible
+        await expect(signInLogInPage.isNewUserSignupText()).toBeVisible();
+
+        // Enter name and already registered email address
+        await signInLogInPage.fillSignupName(randomData.name);
+        await signInLogInPage.fillSignupEmail(data.valideEmail);
+
+        // Click 'Signup' button
+        await signInLogInPage.clickSignupButton();
+
+        // Verify error 'Email Address already exist!' is visible
+        await expect(signInLogInPage.isEmailAlreadyExistError()).toBeVisible();
+        await expect(signInLogInPage.isEmailAlreadyExistError()).toHaveText(data.emailAlreadyExistText);
+
+    });
+
+
+
+    test('Test Case 6: Contact Us Form', async ({ page }) => {
+
+        const homePage = new HomePage(page);
+        const contactUsPage = new ContactUsPage(page);
+
+        // Visit the automation exercise website
+        await homePage.visit();
+
+        // Verify that home page is visible successfully
+        await expect(homePage.homePagelogo()).toBeVisible();
+
+        // Click on 'Contact Us' button
+        await homePage.clickContactUsButton();
+
+        // Verify 'GET IN TOUCH' is visible
+        await expect(contactUsPage.isGetInTouchTitle()).toBeVisible();
+        await expect(contactUsPage.isGetInTouchTitle()).toHaveText(data.getInTouchText);
+
+        // Enter name, email, subject and message
+        await contactUsPage.fillContactForm(randomData.name, randomData.email, randomData.subject, randomData.message);
+
+        // Upload file
+        await contactUsPage.uploadFile('./utils/sampleUpload.txt');
+
+        // Click 'Submit' button and click OK on the confirmation dialog
+        await contactUsPage.clickSubmitButton();
+
+        // Verify success message 'Success! Your details have been submitted successfully.' is visible
+        await expect(contactUsPage.isSuccessMessage()).toBeVisible();
+        await expect(contactUsPage.isSuccessMessage()).toHaveText(data.contactUsSuccessText);
+
+        // Click 'Home' button and verify that landed to home page successfully
+        await contactUsPage.clickHomeButton();
+        await expect(homePage.homePagelogo()).toBeVisible();
+
+    });
+
+
+
+    test('Test Case 7: Verify Test Cases Page', async ({ page }) => {
+
+        const homePage = new HomePage(page);
+
+        // Visit the automation exercise website
+        await homePage.visit();
+
+        // Verify that home page is visible successfully
+        await expect(homePage.homePagelogo()).toBeVisible();
+
+        // Click on 'Test Cases' button
+        await homePage.clickTestCasesButton();
+
+        // Verify user is navigated to test cases page successfully
+        await expect(page).toHaveURL(/\/test_cases$/);
+
+    });
+
+
+
+    test('Test Case 8: Verify All Products and product detail page', async ({ page }) => {
+
+        const homePage = new HomePage(page);
+        const productsPage = new ProductsPage(page);
+        const productDetailPage = new ProductDetailPage(page);
+
+        // Visit the automation exercise website
+        await homePage.visit();
+
+        // Verify that home page is visible successfully
+        await expect(homePage.homePagelogo()).toBeVisible();
+
+        // Click on 'Products' button
+        await homePage.clickProductsButton();
+
+        // Verify user is navigated to ALL PRODUCTS page successfully
+        await expect(productsPage.isPageTitle()).toBeVisible();
+        await expect(productsPage.isPageTitle()).toHaveText(data.allProductsText);
+
+        // The products list is visible
+        await expect(productsPage.isProductsListVisible()).toBeVisible();
+
+        // Click on 'View Product' of first product
+        await productsPage.clickViewProduct(0);
+
+        // User is landed to product detail page
+        // Verify that product details are visible: product name, category, price, availability, condition, brand
+        await expect(productDetailPage.isProductNameText()).toBeVisible();
+        await expect(productDetailPage.isProductCategoryText()).toBeVisible();
+        await expect(productDetailPage.isProductPriceText()).toBeVisible();
+        await expect(productDetailPage.isProductAvailabilityText()).toBeVisible();
+        await expect(productDetailPage.isProductConditionText()).toBeVisible();
+        await expect(productDetailPage.isProductBrandText()).toBeVisible();
+
+    });
+
+
+
+    test('Test Case 9: Search Product', async ({ page }) => {
+
+        const homePage = new HomePage(page);
+        const productsPage = new ProductsPage(page);
+
+        // Visit the automation exercise website
+        await homePage.visit();
+
+        // Verify that home page is visible successfully
+        await expect(homePage.homePagelogo()).toBeVisible();
+
+        // Click on 'Products' button
+        await homePage.clickProductsButton();
+
+        // Verify user is navigated to ALL PRODUCTS page successfully
+        await expect(productsPage.isPageTitle()).toBeVisible();
+
+        // Enter product name in search input and click search button
+        await productsPage.searchProduct(data.productName);
+
+        // Verify 'SEARCHED PRODUCTS' is visible
+        await expect(productsPage.isPageTitle()).toHaveText(data.searchedProductsText);
+
+        // Verify all the products related to search are visible
+        await expect(productsPage.isProductsListVisible()).toBeVisible();
+
+    });
+
+
+
+    test('Test Case 10: Verify Subscription in home page', async ({ page }) => {
+
+        const homePage = new HomePage(page);
+
+        // Visit the automation exercise website
+        await homePage.visit();
+
+        // Verify that home page is visible successfully
+        await expect(homePage.homePagelogo()).toBeVisible();
+
+        // Scroll down to footer
+        // Verify text 'SUBSCRIPTION'
+        await expect(homePage.isSubscriptionText()).toBeVisible();
+        await expect(homePage.isSubscriptionText()).toHaveText(data.subscriptionText);
+
+        // Enter email address in input and click arrow button
+        await homePage.fillSubscribeEmail(randomData.email);
+        await homePage.clickSubscribeButton();
+
+        // Verify success message 'You have been successfully subscribed!' is visible
+        await expect(homePage.isSubscribeSuccessMessage()).toBeVisible();
+        await expect(homePage.isSubscribeSuccessMessage()).toHaveText(data.subscribeSuccessText);
 
     });
 
